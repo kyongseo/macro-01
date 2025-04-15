@@ -20,13 +20,17 @@ target_time = "14:00:58"
 while True:
     now = datetime.datetime.now().strftime('%H:%M:%S')
     if now == target_time:
-        driver.get("https://www.interpark.com/")
+        driver.get("https://poticket.interpark.com/SportsBook/BookMain.asp")
         break
     time.sleep(0.1)
 
 # 2. 안심번호 수동 입력 대기
 input("수동 입력 후 엔터 >> ")
 time.sleep(2)  # 페이지 로딩
+
+# iframe 진입
+iframe = driver.find_element(By.ID, "ifrmSeat")
+driver.switch_to.frame(iframe)
 
 # 3. 좌석 선택
 driver.find_element(By.XPATH, "//area[@title='A열 1번']").click()
